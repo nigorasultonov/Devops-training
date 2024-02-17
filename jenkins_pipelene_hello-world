@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh 'docker pull hello-world'
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'docker run hello-world'
+            }
+        }
+    }
+}
