@@ -34,12 +34,6 @@ pipeline {
             // Cleanup steps that should always run, regardless of pipeline result
             cleanUpContainers()
         }
-        success {
-            // Cleanup steps specific to successful pipeline runs
-        }
-        failure {
-            // Cleanup steps specific to failed pipeline runs
-        }
     }
 }
 
