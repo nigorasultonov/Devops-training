@@ -25,7 +25,7 @@ pipeline {
          }
         stage('Docker Run') {
             steps {
-                sh 'docker run -d -p 8080:80 my-apache-image'
+                sh 'docker run -d -p 5000:80 my-apache-image'
             }
          }
     }
