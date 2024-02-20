@@ -14,7 +14,8 @@ pipeline {
         }
         stage('Pull Dockerfile') {
             steps {
-                git 'https://github.com/nigorasultonov/Devops-training.git'
+                git url: 'https://github.com/nigorasultonov/Devops-training.git', branch: 'main'
+                sh 'git checkout Dockerfile'
             }
         }
          stage('Build Docker Image') {
@@ -28,4 +29,22 @@ pipeline {
             }
          }
     }
+    post {
+        always {
+            // Cleanup steps that should always run, regardless of pipeline result
+            cleanUpContainers()
+        }
+        success {
+            // Cleanup steps specific to successful pipeline runs
+        }
+        failure {
+            // Cleanup steps specific to failed pipeline runs
+        }
+    }
+}
+
+def cleanUpContainers() {
+    // Stop and remove Docker containers
+    sh 'docker stop $(docker ps -a -q)'
+    sh 'docker rm $(docker ps -a -q)'
 }
